@@ -5,15 +5,21 @@ var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 
-// configuration ===========================================
-	
 // config files
 var port = process.env.PORT || 8080; // set our port
 var db = require('./config/db');
 
-// connect to our mongoDB database (commented out after you enter in your own credentials)
-connectionsubject = mongoose.createConnection(db.urlSubjectViews);
-
+mongoose.connect(db.urlSubjectViews, {server: { poolSize: 10 }}, function(error) {
+	if (error) {
+		console.log(error);
+		console.log("Mongoose connection failed. Process exiting...");
+		setTimeout(() => {
+			process.exit();
+		}, 5000);
+	} else {
+		console.log("Connected correctly to database...");
+	}
+});
 
 
 // get all data/stuff of the body (POST) parameters
