@@ -6,7 +6,7 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 
 // config files
-var port = process.env.PORT || 8080; // set our port
+var port = process.env.PORT || 3000; // set our port
 var db = require('./config/db');
 
 mongoose.connect(db.urlSubjectViews, {server: { poolSize: 10 }}, function(error) {
